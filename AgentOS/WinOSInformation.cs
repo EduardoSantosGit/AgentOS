@@ -11,6 +11,7 @@ namespace AgentOS
             var winos = new WinOSInfo();
 
             winos = GetInfoProcessor(winos);
+            winos = GetInfoMemory(winos);
 
             return winos;
         }
@@ -23,6 +24,15 @@ namespace AgentOS
             winos.ProcessorLevel = Environment.GetEnvironmentVariable("PROCESSOR_LEVEL");
             winos.ProcessorNumber = Environment.ProcessorCount.ToString();
             return winos;
+        }
+
+        
+
+        private static WinOSInfo GetInfoMemory(WinOSInfo winos)
+        {
+            var memoryInfo = new GlobalKernelEx();
+            var memory = (memoryInfo.TotalPhysicalMemory / 1024 / 1024);
+            return null;
         }
 
 

@@ -1,17 +1,32 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading.Tasks;
+using System.Globalization;
 
 namespace AgentOS
 {
-    public static class GlobalKernelEx
+    public class GlobalKernelEx
     {
-        [DllImport("kernel32.dll")]
-        [return: MarshalAs(UnmanagedType.Bool)]
-        public static extern bool GetPhysicallyInstalledSystemMemory(out long TotalMemoryInKilobytes);
+        static GlobalKernelEx()
+        {
+                GetTotalPhysicalMemory = WindowsMemoryEx.GetTotalPhysicalMemory;
+                GetAvailablePhysicalMemory = WindowsMemoryEx.GetAvailablePhysicalMemory;
+                GetTotalVirtualMemory = WindowsMemoryEx.GetTotalVirtualMemory;
+                GetAvailableVirtualMemory = WindowsMemoryEx.GetAvailableVirtualMemory;
+        }
+
+        private static readonly Func<UInt64> GetTotalPhysicalMemory;
+        private static readonly Func<UInt64> GetAvailablePhysicalMemory;
+        private static readonly Func<UInt64> GetTotalVirtualMemory;
+        private static readonly Func<UInt64> GetAvailableVirtualMemory;
+
+        public UInt64 TotalPhysicalMemory => GetTotalPhysicalMemory.Invoke();
+        public UInt64 AvailablePhysicalMemory => GetAvailablePhysicalMemory.Invoke();
+        public UInt64 TotalVirtualMemory => GetTotalVirtualMemory.Invoke();
+        public UInt64 AvailableVirtualMemory => GetAvailableVirtualMemory.Invoke();
+
+        public CultureInfo InstalledUICulture => CultureInfo.InstalledUICulture;
+        public String OSFullName => WindowsMemoryEx.OSFullName;
+        public String OSPlatform => Environment.OSVersion.Platform.ToString();
+        public String OSVersion => Environment.OSVersion.Version.ToString();
+
     }
-    
 }
