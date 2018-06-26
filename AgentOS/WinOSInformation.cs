@@ -31,8 +31,11 @@ namespace AgentOS
         private static WinOSInfo GetInfoMemory(WinOSInfo winos)
         {
             var memoryInfo = new GlobalKernelEx();
-            var memory = (memoryInfo.TotalPhysicalMemory / 1024 / 1024);
-            return null;
+            winos.MemorySize = Convert.ToDecimal((memoryInfo.TotalPhysicalMemory / (1024 * 1024)) * 0.001);
+            winos.MemoryAvailable = Convert.ToDecimal((memoryInfo.AvailablePhysicalMemory / (1024 * 1024)) * 0.001);
+            winos.MemoryAvailableVertual = Convert.ToDecimal((memoryInfo.AvailableVirtualMemory / (1024 * 1024)) * 0.001);
+            winos.MemoryVirtualSize = Convert.ToDecimal((memoryInfo.TotalVirtualMemory / (1024 * 1024)) * 0.001);
+            return winos;
         }
 
 
