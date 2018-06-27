@@ -17,8 +17,16 @@ namespace AgentOS
         public decimal MemoryAvailableVertual { get; set; }
         public decimal MemoryVirtualSize { get; set; }
         public int LogicalDisksCount { get; set; }
-        public string[] LogicalDisks { get; set; }
+        public List<WinOSDisk> Disks { get; set; }
         public string UserName { get; set; }
         public string WinDir { get; set; }
     }
+
+    public class WinOSDisk
+    {
+        public string Name { get; set; }
+        public decimal TotalSize { get; set; }
+        public decimal FreeSize { get; set; }
+    }
+
 }

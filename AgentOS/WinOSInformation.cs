@@ -42,8 +42,21 @@ namespace AgentOS
 
         private static WinOSInfo GetInfoDisk(WinOSInfo winos)
         {
-            winos.LogicalDisks = Directory.GetLogicalDrives();
             winos.LogicalDisksCount = Directory.GetLogicalDrives().Length;
+
+            var winDisks = new List<WinOSDisk>();
+
+            foreach (var disk in DriveInfo.GetDrives())
+            {
+                var disks = new WinOSDisk();
+                disks.Name = disk.Name;
+                disks.TotalSize = disk.TotalSize;
+                disks.FreeSize = disk.TotalFreeSpace;
+                winDisks.Add(disks);
+            }
+
+            winos.Disks = winDisks;
+
             return winos;
         }
 
