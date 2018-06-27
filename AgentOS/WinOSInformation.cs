@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Text;
 
 namespace AgentOS
@@ -12,6 +13,7 @@ namespace AgentOS
 
             winos = GetInfoProcessor(winos);
             winos = GetInfoMemory(winos);
+            winos = GetInfoDisk(winos);
 
             return winos;
         }
@@ -38,6 +40,12 @@ namespace AgentOS
             return winos;
         }
 
+        private static WinOSInfo GetInfoDisk(WinOSInfo winos)
+        {
+            winos.LogicalDisks = Directory.GetLogicalDrives();
+            winos.LogicalDisksCount = Directory.GetLogicalDrives().Length;
+            return winos;
+        }
 
 
     }

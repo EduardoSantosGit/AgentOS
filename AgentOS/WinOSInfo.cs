@@ -16,6 +16,8 @@ namespace AgentOS
         public decimal MemoryAvailable { get; set; }
         public decimal MemoryAvailableVertual { get; set; }
         public decimal MemoryVirtualSize { get; set; }
+        public int LogicalDisksCount { get; set; }
+        public string[] LogicalDisks { get; set; }
         public string UserName { get; set; }
         public string WinDir { get; set; }
     }
