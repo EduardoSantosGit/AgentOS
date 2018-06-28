@@ -28,6 +28,7 @@ namespace AgentOS
         public decimal TotalSize { get; set; }
         public decimal FreeSize { get; set; }
         public string Format { get; set; }
+        public string RootDirectory { get; set; }
     }
 
 }

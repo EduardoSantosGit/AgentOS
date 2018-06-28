@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Net.NetworkInformation;
 using System.Text;
 
 namespace AgentOS
@@ -14,6 +15,7 @@ namespace AgentOS
             winos = GetInfoProcessor(winos);
             winos = GetInfoMemory(winos);
             winos = GetInfoDisk(winos);
+            winos = GetInfoEthernet(winos);
 
             return winos;
         }
@@ -48,15 +50,31 @@ namespace AgentOS
 
             foreach (var disk in DriveInfo.GetDrives())
             {
-                var disks = new WinOSDisk();
-                disks.Name = disk.Name;
-                disks.TotalSize = Math.Ceiling(disk.TotalSize / 1073741824M);
-                disks.FreeSize = Math.Ceiling(disk.TotalFreeSpace / 1073741824M);
-                disks.Format = disk.DriveFormat;
+                var disks = new WinOSDisk
+                {
+                    Name = disk.Name,
+                    TotalSize = Math.Ceiling(disk.TotalSize / 1073741824M),
+                    FreeSize = Math.Ceiling(disk.TotalFreeSpace / 1073741824M),
+                    Format = disk.DriveFormat,
+                    RootDirectory = disk.RootDirectory.FullName
+                };
                 winDisks.Add(disks);
             }
 
             winos.Disks = winDisks;
+
+            return winos;
+        }
+
+        private static WinOSInfo GetInfoEthernet(WinOSInfo winos)
+        {
+
+            //if (NetworkInterface.GetIsNetworkAvailable())
+            
+            foreach(var eth in NetworkInterface.GetAllNetworkInterfaces())
+            {
+                
+            }
 
             return winos;
         }
