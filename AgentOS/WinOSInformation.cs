@@ -46,11 +46,11 @@ namespace AgentOS
         {
             winos.LogicalDisksCount = Directory.GetLogicalDrives().Length;
 
-            var winDisks = new List<WinOSDisk>();
+            var winDisks = new List<OSDisk>();
 
             foreach (var disk in DriveInfo.GetDrives())
             {
-                var disks = new WinOSDisk
+                var disks = new OSDisk
                 {
                     Name = disk.Name,
                     TotalSize = Math.Ceiling(disk.TotalSize / 1073741824M),
@@ -69,12 +69,48 @@ namespace AgentOS
         private static WinOSInfo GetInfoEthernet(WinOSInfo winos)
         {
 
-            //if (NetworkInterface.GetIsNetworkAvailable())
-            
+            if (!NetworkInterface.GetIsNetworkAvailable())
+            {
+                winos.ExistsConnection = false;
+                return winos;
+            }
+
+            int KB = 1024;
+            int MB = KB * KB;
+            int GB = MB * KB;
+            long TB = (long)GB * KB;
+
+            winos.ExistsConnection = true;
+
+            var netws = new List<OSNetwork>();
+
             foreach(var eth in NetworkInterface.GetAllNetworkInterfaces())
             {
-                
+                var net = new OSNetwork
+                {
+                    Name = eth.Name,
+                    NetworkType = eth.NetworkInterfaceType.ToString(),
+                    Status = eth.OperationalStatus.ToString(),
+                    Description = eth.Description
+                };
+
+                var speed = eth.Speed / 8;
+
+                if (speed >= TB)
+                    net.Speed = $"{(speed / TB)}TB";
+                else if (speed >= GB)
+                    net.Speed = $"{(speed / GB)}GB";
+                else if (speed >= MB)
+                    net.Speed = $"{(speed / MB)}MB";
+                else if (speed >= KB)
+                    net.Speed = $"{(speed / KB)}KB";
+                else
+                    net.Speed = $"{(speed / KB)}Bytes";
+
+                netws.Add(net);
             }
+
+            winos.Networks = netws;
 
             return winos;
         }

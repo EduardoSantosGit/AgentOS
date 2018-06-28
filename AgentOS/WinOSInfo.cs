@@ -17,18 +17,29 @@ namespace AgentOS
         public decimal MemoryAvailableVertual { get; set; }
         public decimal MemoryVirtualSize { get; set; }
         public int LogicalDisksCount { get; set; }
-        public List<WinOSDisk> Disks { get; set; }
+        public List<OSDisk> Disks { get; set; }
+        public bool ExistsConnection { get; set; }
+        public List<OSNetwork> Networks { get; set; }
         public string UserName { get; set; }
         public string WinDir { get; set; }
     }
 
-    public class WinOSDisk
+    public class OSDisk
     {
         public string Name { get; set; }
         public decimal TotalSize { get; set; }
         public decimal FreeSize { get; set; }
         public string Format { get; set; }
         public string RootDirectory { get; set; }
+    }
+
+    public class OSNetwork
+    {
+        public string Name { get; set; }
+        public string Speed { get; set; }
+        public string Description { get; set; }
+        public string Status { get; set; }
+        public string NetworkType { get; set; }
     }
 
 }
