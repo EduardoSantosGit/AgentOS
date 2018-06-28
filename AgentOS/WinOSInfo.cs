@@ -27,6 +27,7 @@ namespace AgentOS
         public string Name { get; set; }
         public decimal TotalSize { get; set; }
         public decimal FreeSize { get; set; }
+        public string Format { get; set; }
     }
 
 }

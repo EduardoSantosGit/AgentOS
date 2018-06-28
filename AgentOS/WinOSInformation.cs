@@ -50,8 +50,9 @@ namespace AgentOS
             {
                 var disks = new WinOSDisk();
                 disks.Name = disk.Name;
-                disks.TotalSize = disk.TotalSize;
-                disks.FreeSize = disk.TotalFreeSpace;
+                disks.TotalSize = Math.Ceiling(disk.TotalSize / 1073741824M);
+                disks.FreeSize = Math.Ceiling(disk.TotalFreeSpace / 1073741824M);
+                disks.Format = disk.DriveFormat;
                 winDisks.Add(disks);
             }
 
