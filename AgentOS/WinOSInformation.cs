@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Management;
 using System.Net.NetworkInformation;
 using System.Text;
 
@@ -16,6 +17,7 @@ namespace AgentOS
             winos = GetInfoMemory(winos);
             winos = GetInfoDisk(winos);
             winos = GetInfoEthernet(winos);
+            winos = GetInfoGPU(winos);
 
             return winos;
         }
@@ -111,6 +113,37 @@ namespace AgentOS
             }
 
             winos.Networks = netws;
+
+            return winos;
+        }
+
+        private static WinOSInfo GetInfoGPU(WinOSInfo winos)
+        {
+            ManagementObjectSearcher myVideoObject = new ManagementObjectSearcher("select * from Win32_VideoController");
+
+            var gpus = new List<OSGPU>();
+
+            foreach (ManagementObject obj in myVideoObject.Get())
+            {
+                var gpu = new OSGPU
+                {
+                    Name = obj["Name"].ToString(),
+                    Status = obj["Status"].ToString(),
+                    Caption = obj["Caption"].ToString(),
+                    DeviceID = obj["DeviceID"].ToString(),
+                    AdapterRAM = Convert.ToDecimal(obj["AdapterRAM"]),
+                    AdapterDACType = obj["AdapterDACType"].ToString(),
+                    Monochrome = Convert.ToBoolean(obj["Monochrome"]),
+                    InstalledDisplayDrivers = obj["InstalledDisplayDrivers"].ToString(),
+                    DriverVersion = obj["DriverVersion"].ToString(),
+                    VideoProcessor = obj["VideoProcessor"].ToString(),
+                    VideoArchitecture = Convert.ToInt64(obj["VideoArchitecture"]),
+                    VideoMemoryType = Convert.ToInt64(obj["VideoMemoryType"])
+                };
+                gpus.Add(gpu);
+            }
+
+            winos.GPUs = gpus;
 
             return winos;
         }
