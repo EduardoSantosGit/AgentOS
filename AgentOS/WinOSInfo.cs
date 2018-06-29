@@ -20,6 +20,7 @@ namespace AgentOS
         public List<OSDisk> Disks { get; set; }
         public bool ExistsConnection { get; set; }
         public List<OSNetwork> Networks { get; set; }
+        public List<OSGPU> GPUs { get; set; }
         public string UserName { get; set; }
         public string WinDir { get; set; }
     }
@@ -40,6 +41,23 @@ namespace AgentOS
         public string Description { get; set; }
         public string Status { get; set; }
         public string NetworkType { get; set; }
+    }
+
+    public class OSGPU
+    {
+        public string Name { get; set; }
+        public string Status { get; set; }
+        public string Caption { get; set; }
+        public string DeviceID { get; set; }
+        public decimal AdapterRAM { get; set; }
+        public string AdapterDACType { get; set; }
+        public bool Monochrome { get; set; }
+        public string InstalledDisplayDrivers { get; set; }
+        public string DriverVersion { get; set; }
+        public string VideoProcessor { get; set; }
+        public long VideoArchitecture { get; set; }
+        public long VideoMemoryType { get; set; }
+
     }
 
 }
