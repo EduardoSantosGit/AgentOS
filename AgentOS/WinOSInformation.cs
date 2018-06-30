@@ -18,6 +18,7 @@ namespace AgentOS
             winos = GetInfoDisk(winos);
             winos = GetInfoEthernet(winos);
             winos = GetInfoGPU(winos);
+            winos = GetInfoOS(winos);
 
             return winos;
         }
@@ -145,6 +146,11 @@ namespace AgentOS
 
             winos.GPUs = gpus;
 
+            return winos;
+        }
+
+        private static WinOSInfo GetInfoOS(WinOSInfo winos)
+        {
             return winos;
         }
 
