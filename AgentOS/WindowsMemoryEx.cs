@@ -24,8 +24,8 @@ namespace AgentOS
         private class InternalMemoryStatus
         {
             private readonly Boolean isOldOS;
-            private MEMORYSTATUS memoryStatus;
-            private MEMORYSTATUSEX memoryStatusEx;
+            public MEMORYSTATUS memoryStatus;
+            public MEMORYSTATUSEX memoryStatusEx;
 
             internal InternalMemoryStatus()
             {
