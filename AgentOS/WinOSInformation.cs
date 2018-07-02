@@ -152,21 +152,30 @@ namespace AgentOS
         private static WinOSInfo GetInfoOS(WinOSInfo winos)
         {
             ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_OperatingSystem");
+
+            if (mos.Get().Count <= 0)
+                return winos;
+
+            var listOS = new List<OSInfo>();
+
             foreach (ManagementObject managementObject in mos.Get())
             {
+
+                var osInfo = new OSInfo();
+
                 if (managementObject["Caption"] != null)
-                {
-                    var e = managementObject["Caption"].ToString();   //Display operating system caption
-                }
+                    osInfo.OperationName = managementObject["Caption"].ToString();
+
                 if (managementObject["OSArchitecture"] != null)
-                {
-                    var f =  managementObject["OSArchitecture"].ToString();   //Display operating system architecture.
-                }
+                    osInfo.OperationArchitecture =  managementObject["OSArchitecture"].ToString();
+
                 if (managementObject["CSDVersion"] != null)
-                {
-                    var d = managementObject["CSDVersion"].ToString();     //Display operating system version.
-                }
+                    osInfo.OperationVersion = managementObject["CSDVersion"].ToString();
+
+                listOS.Add(osInfo);
             }
+
+            winos.OSInfos = listOS;
 
             return winos;
         }

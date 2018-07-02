@@ -21,8 +21,7 @@ namespace AgentOS
         public bool ExistsConnection { get; set; }
         public List<OSNetwork> Networks { get; set; }
         public List<OSGPU> GPUs { get; set; }
-        public string UserName { get; set; }
-        public string WinDir { get; set; }
+        public List<OSInfo> OSInfos { get; set; }
     }
 
     public class OSDisk
@@ -60,4 +59,10 @@ namespace AgentOS
 
     }
 
+    public class OSInfo
+    {
+        public string OperationName { get; set; }
+        public string OperationArchitecture { get; set; }
+        public string OperationVersion { get; set; }
+    }
 }
