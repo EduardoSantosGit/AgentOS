@@ -20,6 +20,7 @@ namespace AgentOS
             winos = GetInfoEthernet(winos);
             winos = GetInfoGPU(winos);
             winos = GetInfoOS(winos);
+            winos = GetInfoProcesses(winos);
 
             return winos;
         }
@@ -181,13 +182,22 @@ namespace AgentOS
             return winos;
         }
 
-        public static WinOSInfo GetInfoProcesses(WinOSInfo winos)
+        private static WinOSInfo GetInfoProcesses(WinOSInfo winos)
         {
+            var listPro = new List<OSInfoProcesses>();
+
             foreach (var process in Process.GetProcesses())
             {
-                //Console.WriteLine("Process: {0} ID: {1}", process.ProcessName, process.Id);
+                var pro = new OSInfoProcesses
+                {
+                    ProcessId = process.Id,
+                    ProcessName = process.ProcessName
+                };
+
+                listPro.Add(pro);
             }
 
+            winos.OSInfoProcesses = listPro;
             return winos;
         }
 

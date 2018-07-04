@@ -22,6 +22,8 @@ namespace AgentOS
         public List<OSNetwork> Networks { get; set; }
         public List<OSGPU> GPUs { get; set; }
         public List<OSInfo> OSInfos { get; set; }
+        public List<OSInfoProcesses> OSInfoProcesses { get; set; }
+
     }
 
     public class OSDisk
