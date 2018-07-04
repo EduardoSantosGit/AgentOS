@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Management;
 using System.Net.NetworkInformation;
@@ -176,6 +177,16 @@ namespace AgentOS
             }
 
             winos.OSInfos = listOS;
+
+            return winos;
+        }
+
+        public static WinOSInfo GetInfoProcesses(WinOSInfo winos)
+        {
+            foreach (var process in Process.GetProcesses())
+            {
+                //Console.WriteLine("Process: {0} ID: {1}", process.ProcessName, process.Id);
+            }
 
             return winos;
         }

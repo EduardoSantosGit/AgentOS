@@ -65,4 +65,10 @@ namespace AgentOS
         public string OperationArchitecture { get; set; }
         public string OperationVersion { get; set; }
     }
+
+    public class OSInfoProcesses
+    {
+        public int ProcessId { get; set; }
+        public string ProcessName { get; set; }
+    }
 }
