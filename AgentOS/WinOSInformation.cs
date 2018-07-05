@@ -21,6 +21,7 @@ namespace AgentOS
             winos = GetInfoGPU(winos);
             winos = GetInfoOS(winos);
             winos = GetInfoProcesses(winos);
+            winos = GetInfoServices(winos);
 
             return winos;
         }
@@ -191,13 +192,19 @@ namespace AgentOS
                 var pro = new OSInfoProcesses
                 {
                     ProcessId = process.Id,
-                    ProcessName = process.ProcessName
+                    ProcessName = process.ProcessName,
+                    Status = (process.Responding == true) ? "OK" : "Stopped"
                 };
 
                 listPro.Add(pro);
             }
 
             winos.OSInfoProcesses = listPro;
+            return winos;
+        }
+
+        private static WinOSInfo GetInfoServices(WinOSInfo winos)
+        {
             return winos;
         }
 

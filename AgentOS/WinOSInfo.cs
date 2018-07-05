@@ -72,5 +72,6 @@ namespace AgentOS
     {
         public int ProcessId { get; set; }
         public string ProcessName { get; set; }
+        public string Status { get; set; }
     }
 }
