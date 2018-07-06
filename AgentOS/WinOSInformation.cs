@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.IO;
 using System.Management;
 using System.Net.NetworkInformation;
+using System.ServiceProcess;
 using System.Text;
 
 namespace AgentOS
@@ -205,6 +206,14 @@ namespace AgentOS
 
         private static WinOSInfo GetInfoServices(WinOSInfo winos)
         {
+            var services = ServiceController.GetServices();
+
+            foreach (var item in services)
+            {
+                var name = item.DisplayName;
+                var status = item.Status;
+            }
+
             return winos;
         }
 
