@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AgentOS.Common;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -21,7 +22,7 @@ namespace AgentOS.Services
 
             winOSInfo = WinOSInformation.GetInfoEthernet(winOSInfo);
 
-
+            winOSInfo.Networks.Select(x => Formatter.FormatSpeedNet(x.Speed));
 
             return winOSInfo;
         }
