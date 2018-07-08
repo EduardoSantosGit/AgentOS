@@ -27,7 +27,7 @@ namespace AgentOS
             return winos;
         }
 
-        private static WinOSInfo GetInfoProcessor(WinOSInfo winos)
+        public static WinOSInfo GetInfoProcessor(WinOSInfo winos)
         {
             winos.ProcessorArchitecture = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE",
                 EnvironmentVariableTarget.Machine);
@@ -37,9 +37,9 @@ namespace AgentOS
             return winos;
         }
 
-        
 
-        private static WinOSInfo GetInfoMemory(WinOSInfo winos)
+
+        public static WinOSInfo GetInfoMemory(WinOSInfo winos)
         {
             var memoryInfo = new GlobalKernelEx();
             winos.MemorySize = Convert.ToDecimal((memoryInfo.TotalPhysicalMemory / (1024 * 1024)) * 0.001);
@@ -49,7 +49,7 @@ namespace AgentOS
             return winos;
         }
 
-        private static WinOSInfo GetInfoDisk(WinOSInfo winos)
+        public static WinOSInfo GetInfoDisk(WinOSInfo winos)
         {
             winos.LogicalDisksCount = Directory.GetLogicalDrives().Length;
 
@@ -77,7 +77,7 @@ namespace AgentOS
             return winos;
         }
 
-        private static WinOSInfo GetInfoEthernet(WinOSInfo winos)
+        public static WinOSInfo GetInfoEthernet(WinOSInfo winos)
         {
 
             if (!NetworkInterface.GetIsNetworkAvailable())
@@ -86,10 +86,10 @@ namespace AgentOS
                 return winos;
             }
 
-            int KB = 1024;
-            int MB = KB * KB;
-            int GB = MB * KB;
-            long TB = (long)GB * KB;
+            //int KB = 1024;
+            //int MB = KB * KB;
+            //int GB = MB * KB;
+            //long TB = (long)GB * KB;
 
             winos.ExistsConnection = true;
 
@@ -105,18 +105,20 @@ namespace AgentOS
                     Description = eth.Description
                 };
 
-                var speed = eth.Speed / 8;
+                net.Speed = eth.Speed.ToString();
 
-                if (speed >= TB)
-                    net.Speed = $"{(speed / TB)}TB";
-                else if (speed >= GB)
-                    net.Speed = $"{(speed / GB)}GB";
-                else if (speed >= MB)
-                    net.Speed = $"{(speed / MB)}MB";
-                else if (speed >= KB)
-                    net.Speed = $"{(speed / KB)}KB";
-                else
-                    net.Speed = $"{(speed / KB)}Bytes";
+                //var speed = eth.Speed / 8;
+
+                //if (speed >= TB)
+                //    net.Speed = $"{(speed / TB)}TB";
+                //else if (speed >= GB)
+                //    net.Speed = $"{(speed / GB)}GB";
+                //else if (speed >= MB)
+                //    net.Speed = $"{(speed / MB)}MB";
+                //else if (speed >= KB)
+                //    net.Speed = $"{(speed / KB)}KB";
+                //else
+                //    net.Speed = $"{(speed / KB)}Bytes";
 
                 netws.Add(net);
             }
@@ -126,7 +128,7 @@ namespace AgentOS
             return winos;
         }
 
-        private static WinOSInfo GetInfoGPU(WinOSInfo winos)
+        public static WinOSInfo GetInfoGPU(WinOSInfo winos)
         {
             ManagementObjectSearcher myVideoObject = new ManagementObjectSearcher("select * from Win32_VideoController");
 
@@ -157,7 +159,7 @@ namespace AgentOS
             return winos;
         }
 
-        private static WinOSInfo GetInfoOS(WinOSInfo winos)
+        public static WinOSInfo GetInfoOS(WinOSInfo winos)
         {
             ManagementObjectSearcher mos = new ManagementObjectSearcher("select * from Win32_OperatingSystem");
 
@@ -188,7 +190,7 @@ namespace AgentOS
             return winos;
         }
 
-        private static WinOSInfo GetInfoProcesses(WinOSInfo winos)
+        public static WinOSInfo GetInfoProcesses(WinOSInfo winos)
         {
             var listPro = new List<OSInfoProcesses>();
 
@@ -208,7 +210,7 @@ namespace AgentOS
             return winos;
         }
 
-        private static WinOSInfo GetInfoServices(WinOSInfo winos)
+        public static WinOSInfo GetInfoServices(WinOSInfo winos)
         {
             var services = ServiceController.GetServices();
 
