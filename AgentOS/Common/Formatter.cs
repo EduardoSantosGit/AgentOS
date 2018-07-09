@@ -9,7 +9,7 @@ namespace AgentOS.Common
     public static class Formatter
     {
 
-        public static string FormatSpeedNet(this string value)
+        public static string FormatSpeedNet(string value)
         {
             var speed = Convert.ToInt64(value) / 8;
 
