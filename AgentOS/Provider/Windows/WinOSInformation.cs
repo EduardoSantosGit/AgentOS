@@ -86,11 +86,6 @@ namespace AgentOS
                 return winos;
             }
 
-            //int KB = 1024;
-            //int MB = KB * KB;
-            //int GB = MB * KB;
-            //long TB = (long)GB * KB;
-
             winos.ExistsConnection = true;
 
             var netws = new List<OSNetwork>();
@@ -106,19 +101,6 @@ namespace AgentOS
                 };
 
                 net.Speed = eth.Speed.ToString();
-
-                //var speed = eth.Speed / 8;
-
-                //if (speed >= TB)
-                //    net.Speed = $"{(speed / TB)}TB";
-                //else if (speed >= GB)
-                //    net.Speed = $"{(speed / GB)}GB";
-                //else if (speed >= MB)
-                //    net.Speed = $"{(speed / MB)}MB";
-                //else if (speed >= KB)
-                //    net.Speed = $"{(speed / KB)}KB";
-                //else
-                //    net.Speed = $"{(speed / KB)}Bytes";
 
                 netws.Add(net);
             }

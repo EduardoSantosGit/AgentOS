@@ -34,9 +34,17 @@ namespace AgentOS.Services
             winOSInfo = WinOSInformation.GetInfoOS(winOSInfo);
             winOSInfo = WinOSInformation.GetInfoProcesses(winOSInfo);
             winOSInfo = WinOSInformation.GetInfoServices(winOSInfo);
+
             return winOSInfo;
         }
 
+        public string SendDataServerCentral(WinOSInfo winos)
+        {
+
+
+
+            return null;
+        }
 
 
     }
