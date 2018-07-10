@@ -8,6 +8,7 @@
   <ItemGroup>
     <PackageReference Include="CommandLineParser" Version="2.2.1" />
     <PackageReference Include="Newtonsoft.Json" Version="11.0.2" />
+    <PackageReference Include="System.Reactive" Version="4.1.0-preview.84" />
   </ItemGroup>
 
   <ItemGroup>

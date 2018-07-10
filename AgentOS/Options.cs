@@ -13,13 +13,13 @@ namespace AgentOS
         [Option('s', Default = true, HelpText = "Start Monitoring System")]
         public bool Start { get; set; }
 
-        [Option('u', Required = true, HelpText = "Url Server Destiny")]
+        [Option('u', Required = false, Default ="http:\\", HelpText = "Url Server Destiny")]
         public string UrlBase { get; set; }
 
-        [Option('e', Required = true, HelpText = "EndPoint Server Destiny")]
+        [Option('e', Required = false, Default = "http:\\", HelpText = "EndPoint Server Destiny")]
         public string EndPoint { get; set; }
 
-        [Option('t', Required = true, HelpText = "Time Execution Seconds")]
+        [Option('t', Required = false, Default = 10, HelpText = "Time Execution Seconds")]
         public int Interval { get; set; }
 
     }
