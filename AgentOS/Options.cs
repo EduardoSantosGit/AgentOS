@@ -19,5 +19,8 @@ namespace AgentOS
         [Option('e', Required = true, HelpText = "EndPoint Server Destiny")]
         public string EndPoint { get; set; }
 
+        [Option('t', Required = true, HelpText = "Time Execution Seconds")]
+        public int Interval { get; set; }
+
     }
 }

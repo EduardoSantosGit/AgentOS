@@ -1,4 +1,5 @@
-﻿using CommandLine;
+﻿using AgentOS.Services;
+using CommandLine;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,9 +14,19 @@ namespace AgentOS
         public void StartInputFlowMonitor(Options options)
         {
 
+            if (options.Start)
+            {
+                var service = new WindowsService(options.UrlBase, options.EndPoint);
+            }
+
         }
 
         public void ErrorInput(IEnumerable<Error> errors)
+        {
+
+        }
+
+        public void CronJob(int interval)
         {
 
         }
