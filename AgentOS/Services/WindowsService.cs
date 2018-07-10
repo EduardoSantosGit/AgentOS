@@ -14,7 +14,17 @@ namespace AgentOS.Services
         {
         }
 
+        public WinOSInfo GetDataFormatServer()
+        {
+            return GetWinInfo(true);
+        }
+
         public WinOSInfo GetDataServer()
+        {
+            return GetWinInfo();
+        }
+
+        public WinOSInfo GetWinInfo(bool format = false)
         {
             var winOSInfo = new WinOSInfo();
             winOSInfo = WinOSInformation.GetInfoProcessor(winOSInfo);
@@ -22,28 +32,28 @@ namespace AgentOS.Services
             winOSInfo = WinOSInformation.GetInfoDisk(winOSInfo);
             winOSInfo = WinOSInformation.GetInfoEthernet(winOSInfo);
 
-            var netFormat = winOSInfo.Networks
+            if (format)
+            {
+                var netFormat = winOSInfo.Networks
                 .Select(x =>
-                 {
-                     x.Speed = Formatter.FormatSpeedNet(x.Speed); return x;
-                 })
+                {
+                    x.Speed = Formatter.FormatSpeedNet(x.Speed); return x;
+                })
                 .ToList();
 
-            winOSInfo.Networks = netFormat;
+                winOSInfo.Networks = netFormat;
+            }
 
             winOSInfo = WinOSInformation.GetInfoGPU(winOSInfo);
             winOSInfo = WinOSInformation.GetInfoOS(winOSInfo);
             winOSInfo = WinOSInformation.GetInfoProcesses(winOSInfo);
             winOSInfo = WinOSInformation.GetInfoServices(winOSInfo);
 
-            SendDataServerCentral(winOSInfo);
-
             return winOSInfo;
         }
 
         public string SendDataServerCentral(WinOSInfo winos)
         {
-
             var client = new HttpProvider("http://teste.com");
 
             var r = client.SendPostJson<WinOSInfo>("",winos).Result;
