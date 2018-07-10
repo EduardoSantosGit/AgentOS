@@ -10,10 +10,8 @@ namespace AgentOS.Services
 {
     public class WindowsService
     {
-
         public readonly string _urlServer;
         public readonly string _urlEndPoint;
-
 
         public WindowsService(string urlServer, string urlEndPoint)
         {
@@ -27,15 +25,9 @@ namespace AgentOS.Services
             var status = SendDataServerCentral(dataValue);
         }
 
-        public WinOSInfo GetDataFormatServer()
-        {
-            return GetWinInfo(true);
-        }
+        public WinOSInfo GetDataFormatServer() => GetWinInfo(true);
 
-        public WinOSInfo GetDataServer()
-        {
-            return GetWinInfo();
-        }
+        public WinOSInfo GetDataServer() => GetWinInfo();
 
         public WinOSInfo GetWinInfo(bool format = false)
         {
