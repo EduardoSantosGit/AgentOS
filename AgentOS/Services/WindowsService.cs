@@ -10,8 +10,21 @@ namespace AgentOS.Services
 {
     public class WindowsService
     {
-        public WindowsService()
+
+        public readonly string _urlServer;
+        public readonly string _urlEndPoint;
+
+
+        public WindowsService(string urlServer, string urlEndPoint)
         {
+            _urlServer = urlServer;
+            _urlEndPoint = urlEndPoint;
+        }
+
+        public void OnMonitorServer()
+        {
+            var dataValue = GetDataServer();
+            var status = SendDataServerCentral(dataValue);
         }
 
         public WinOSInfo GetDataFormatServer()
@@ -54,9 +67,8 @@ namespace AgentOS.Services
 
         public string SendDataServerCentral(WinOSInfo winos)
         {
-            var client = new HttpProvider("http://teste.com");
-
-            var r = client.SendPostJson<WinOSInfo>("",winos).Result;
+            var client = new HttpProvider(_urlServer);
+            var result = client.SendPostJson<WinOSInfo>(_urlEndPoint, winos).Result;
 
             return null;
         }

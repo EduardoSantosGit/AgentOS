@@ -14,7 +14,7 @@ namespace AgentOS.Test
         public void GetDataServer_ReturnsDataComputerStatus()
         {
 
-            var service = new WindowsService();
+            var service = new WindowsService(null, null);
             var data = service.GetDataServer();
 
             Assert.NotNull(data);
