@@ -18,7 +18,6 @@ namespace AgentOS
 
             Console.WriteLine("Current time: {0}", DateTime.Now);
 
-            // Start event 30 seconds from now.
             IObservable<long> observable = Observable.Timer(TimeSpan.FromSeconds(2));
 
             // Token for cancelation
@@ -32,12 +31,6 @@ namespace AgentOS
             // Subscribe the obserable to the task on execution.
             observable.Subscribe(x => task.Start(), source.Token);
 
-            // If you want to cancel the task do: 
-            //source.Cancel();
-
-            Console.WriteLine("Press any key to exit");
-            Console.ReadKey();
-
             //if (options.Start)
             //{
             //    Task.Run(() => CronJob(options.Interval));
@@ -46,14 +39,21 @@ namespace AgentOS
 
         }
 
-        public void ErrorInput(IEnumerable<Error> errors)
+        
+        public void TriggerSchedule(int time)
         {
 
         }
 
-        async Task CronJob(int interval)
+        public void TaskMonitorSystem()
         {
-            await Task.Delay(TimeSpan.FromSeconds(interval));
+
+        }
+
+
+        public void ErrorInput(IEnumerable<Error> errors)
+        {
+
         }
     }
 }
