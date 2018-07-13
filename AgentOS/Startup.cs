@@ -1,27 +1,15 @@
 ﻿using AgentOS.Services;
 using CommandLine;
-using FluentScheduler;
 using System;
 using System.Collections.Generic;
 
 namespace AgentOS
 {
-    public class MyRegistry : Registry
-    {
-        public MyRegistry()
-        {
-        }
-    }
-
     public class Startup
     {
 
         public void StartInputFlowMonitor(Options options)
         {
-
-            JobManager.Initialize(new MyRegistry());
-            JobManager.AddJob(() => Console.WriteLine("Late job!"), (s) => s.ToRunEvery(5).Seconds());
-
             //Console.WriteLine("Current time: {0}", DateTime.Now);
 
             //IObservable<long> observable = Observable.Timer(TimeSpan.FromSeconds(2));
