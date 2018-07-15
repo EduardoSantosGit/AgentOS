@@ -8,7 +8,6 @@ namespace AgentOS
 {
     public class Startup
     {
-
         public void StartInputFlowMonitor(Options options)
         {
             using (var cts = new CancellationTokenSource())

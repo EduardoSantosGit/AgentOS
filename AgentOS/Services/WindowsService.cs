@@ -1,10 +1,7 @@
 ﻿using AgentOS.Common;
 using AgentOS.Provider.Http;
 using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace AgentOS.Services
 {
@@ -61,6 +58,8 @@ namespace AgentOS.Services
         {
             var client = new HttpProvider(_urlServer);
             var result = client.SendPostJson<WinOSInfo>(_urlEndPoint, winos).Result;
+
+            Console.WriteLine("Response {0} Hour {1}", result, DateTimeOffset.UtcNow);
 
             return null;
         }
