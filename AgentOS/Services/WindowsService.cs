@@ -19,7 +19,14 @@ namespace AgentOS.Services
         public void OnMonitorServer()
         {
             var dataValue = GetDataServer();
-            var status = SendDataServerCentral(dataValue);
+            var status = "";
+            var count = 0;
+            do
+            {
+                count++;
+                status = SendDataServerCentral(dataValue);
+            }
+            while (status == "OK" || (status != "OK" && count < 3));
         }
 
         public WinOSInfo GetDataFormatServer() => GetWinInfo(true);
@@ -58,10 +65,7 @@ namespace AgentOS.Services
         {
             var client = new HttpProvider(_urlServer);
             var result = client.SendPostJson<WinOSInfo>(_urlEndPoint, winos).Result;
-
-            Console.WriteLine("Response {0} Hour {1}", result, DateTimeOffset.UtcNow);
-
-            return null;
+            return result;
         }
 
 
