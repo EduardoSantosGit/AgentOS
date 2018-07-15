@@ -29,5 +29,21 @@ namespace AgentOS.Test
             Assert.NotEmpty(result.ProcessorNumber);
         }
 
+        [Fact]
+        public void GetInfoMemory_ReturnDecimalLargerZero()
+        {
+            var winos = new WinOSInfo();
+            var result = WinOSInformation.GetInfoMemory(winos);
+
+            Assert.True(result.MemorySize > 0);
+            Assert.True(result.MemoryAvailable > 0);
+            Assert.True(result.MemoryAvailableVertual > 0);
+            Assert.True(result.MemoryVirtualSize > 0);
+        }
+
+
+
+
+
     }
 }
