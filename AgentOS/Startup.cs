@@ -2,6 +2,7 @@
 using CommandLine;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 
 namespace AgentOS
 {
@@ -10,36 +11,32 @@ namespace AgentOS
 
         public void StartInputFlowMonitor(Options options)
         {
-            //Console.WriteLine("Current time: {0}", DateTime.Now);
+            using (var cts = new CancellationTokenSource())
+            {
+                Console.CancelKeyPress += (sender, eventArgs) =>
+                {
+                    cts.Cancel();
 
-            //IObservable<long> observable = Observable.Timer(TimeSpan.FromSeconds(2));
+                    eventArgs.Cancel = true;
+                };
 
-            //// Token for cancelation
-            //CancellationTokenSource source = new CancellationTokenSource();
+                var timer = new Timer(
+                   e => TaskMonitorSystem(options.UrlBase, options.EndPoint),
+                   "",
+                   TimeSpan.Zero,
+                   TimeSpan.FromSeconds(5)
+                );
 
-            //Console.WriteLine("Action started at: {0}", DateTime.Now);
-
-            //// Create task to execute.
-            //Task task = new Task(() => StartInputFlowMonitor(options));
-
-            //// Subscribe the obserable to the task on execution.
-            //observable.Subscribe(x => task.Start(), source.Token);
-
-            //if (options.Start)
-            //{
-            //    Task.Run(() => CronJob(options.Interval));
-            //    var service = new WindowsService(options.UrlBase, options.EndPoint);
-            //}
+                while (cts.IsCancellationRequested == false)
+                    Thread.Sleep(1000);
+            }
         }
 
-        public void TriggerSchedule(int time)
+        public void TaskMonitorSystem(string urlBase, string urlEndPoint)
         {
+            var service = new WindowsService(urlBase, urlEndPoint);
 
-        }
-
-        public void TaskMonitorSystem()
-        {
-
+            service.OnMonitorServer();
         }
 
 
