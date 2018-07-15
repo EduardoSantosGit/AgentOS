@@ -1,4 +1,6 @@
 using System;
+using System.IO;
+using System.Linq;
 using Xunit;
 
 namespace AgentOS.Test
@@ -41,7 +43,25 @@ namespace AgentOS.Test
             Assert.True(result.MemoryVirtualSize > 0);
         }
 
+        [Fact]
+        public void GetInfoDisk_ReturnDataCorrectInfoDisks()
+        {
+            var winos = new WinOSInfo();
+            var result = WinOSInformation.GetInfoDisk(winos);
 
+            var first = result.Disks.FirstOrDefault();
+
+            var di = DriveInfo.GetDrives().Where(x => x.IsReady).ToList();
+
+            Assert.NotNull(result.Disks);
+            Assert.Equal(result.LogicalDisksCount, Directory.GetLogicalDrives().Length);
+            Assert.Equal(di.Count, result.Disks.Count);
+            Assert.NotNull(first.Name);
+            Assert.True(first.TotalSize > 0);
+            Assert.True(first.FreeSize > 0);
+            Assert.NotNull(first.Format);
+            Assert.NotNull(first.RootDirectory);
+        }
 
 
 
