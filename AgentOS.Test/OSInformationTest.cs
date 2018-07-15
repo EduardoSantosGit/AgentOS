@@ -17,5 +17,17 @@ namespace AgentOS.Test
             Assert.NotNull(result.ProcessorNumber);
         }
 
+        [Fact]
+        public void GetInfoProcessor_ReturnsDataFormatString()
+        {
+            var winos = new WinOSInfo();
+            var result = WinOSInformation.GetInfoProcessor(winos);
+
+            Assert.NotEmpty(result.ProcessorArchitecture);
+            Assert.NotEmpty(result.ProcessorIden);
+            Assert.NotEmpty(result.ProcessorLevel);
+            Assert.NotEmpty(result.ProcessorNumber);
+        }
+
     }
 }
