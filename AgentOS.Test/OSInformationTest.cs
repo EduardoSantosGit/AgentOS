@@ -1,6 +1,7 @@
 using System;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using Xunit;
 
 namespace AgentOS.Test
@@ -63,7 +64,23 @@ namespace AgentOS.Test
             Assert.NotNull(first.RootDirectory);
         }
 
+        [Fact]
+        public void GetInfoEthernet_ReturnDataCorrectInfoEthernet()
+        {
+            var winos = new WinOSInfo();
+            var result = WinOSInformation.GetInfoEthernet(winos);
 
+            var first = result.Networks.FirstOrDefault();
+
+            Assert.True(result.ExistsConnection);
+            Assert.NotNull(result.Networks);
+            Assert.Equal(NetworkInterface.GetAllNetworkInterfaces().Count(), result.Networks.Count);
+            Assert.NotNull(first.Name);
+            Assert.NotNull(first.NetworkType);
+            Assert.NotNull(first.Status);
+            Assert.NotNull(first.Description);
+            Assert.NotNull(first.Speed);
+        }
 
     }
 }
