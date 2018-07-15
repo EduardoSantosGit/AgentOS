@@ -6,11 +6,16 @@ namespace AgentOS.Test
     public class OSInformationTest
     {
         [Fact]
-        public void Test1()
+        public void GetInfoProcessor_ReturnsDataProcessorNotNull()
         {
-            var r = WinOSInformation.GetOSInfo();
+            var winos = new WinOSInfo();
+            var result = WinOSInformation.GetInfoProcessor(winos);
 
-            Assert.NotNull(r);
+            Assert.NotNull(result.ProcessorArchitecture);
+            Assert.NotNull(result.ProcessorIden);
+            Assert.NotNull(result.ProcessorLevel);
+            Assert.NotNull(result.ProcessorNumber);
         }
+
     }
 }

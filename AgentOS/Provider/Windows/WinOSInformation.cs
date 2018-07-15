@@ -11,22 +11,6 @@ namespace AgentOS
 {
     public class WinOSInformation
     {
-        public static WinOSInfo GetOSInfo()
-        {
-            var winos = new WinOSInfo();
-
-            winos = GetInfoProcessor(winos);
-            winos = GetInfoMemory(winos);
-            winos = GetInfoDisk(winos);
-            winos = GetInfoEthernet(winos);
-            winos = GetInfoGPU(winos);
-            winos = GetInfoOS(winos);
-            winos = GetInfoProcesses(winos);
-            winos = GetInfoServices(winos);
-
-            return winos;
-        }
-
         public static WinOSInfo GetInfoProcessor(WinOSInfo winos)
         {
             winos.ProcessorArchitecture = Environment.GetEnvironmentVariable("PROCESSOR_ARCHITECTURE",
@@ -36,8 +20,6 @@ namespace AgentOS
             winos.ProcessorNumber = Environment.ProcessorCount.ToString();
             return winos;
         }
-
-
 
         public static WinOSInfo GetInfoMemory(WinOSInfo winos)
         {

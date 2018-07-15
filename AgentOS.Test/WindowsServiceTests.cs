@@ -13,7 +13,6 @@ namespace AgentOS.Test
         [Fact]
         public void GetDataServer_ReturnsDataComputerStatus()
         {
-
             var service = new WindowsService(null, null);
             var data = service.GetDataServer();
 

@@ -31,17 +31,11 @@ namespace AgentOS
             }
         }
 
-        public void TaskMonitorSystem(string urlBase, string urlEndPoint)
-        {
-            var service = new WindowsService(urlBase, urlEndPoint);
+        public void TaskMonitorSystem(string urlBase, string urlEndPoint) => 
+                new WindowsService(urlBase, urlEndPoint)
+                .OnMonitorServer();
 
-            service.OnMonitorServer();
-        }
-
-
-        public void ErrorInput(IEnumerable<Error> errors)
-        {
-
-        }
+        public void ErrorInput(IEnumerable<Error> errors) => 
+            throw new ArgumentOutOfRangeException();
     }
 }
