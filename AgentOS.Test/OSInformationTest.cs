@@ -135,5 +135,15 @@ namespace AgentOS.Test
 
         }
 
+        [Fact]
+        public void GetInfoServices_ReturnDataCorrectGetInfoServices()
+        {
+            var winos = new WinOSInfo();
+            var result = WinOSInformation.GetInfoServices(winos);
+
+            Assert.NotNull(result);
+
+        }
+
     }
 }

@@ -176,14 +176,21 @@ namespace AgentOS
 
         public static WinOSInfo GetInfoServices(WinOSInfo winos)
         {
-            var services = ServiceController.GetServices();
-
-            foreach (var item in services)
+            var listServices = new List<OSInfoServices>();
+            foreach (var item in ServiceController.GetServices())
             {
-                var name = item.DisplayName;
-                var status = item.Status;
-            }
+                var service = new OSInfoServices
+                {
+                    Name = item.DisplayName,
+                    ServiceName = item.ServiceName,
+                    ServicesType = item.ServiceType.ToString(),
+                    StartType = item.StartType.ToString(),
+                    Status = item.Status.ToString()
+                };
 
+                listServices.Add(service);
+            }
+            winos.OSInfoServices = listServices;
             return winos;
         }
 
