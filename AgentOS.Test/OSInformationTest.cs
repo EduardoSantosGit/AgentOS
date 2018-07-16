@@ -102,7 +102,21 @@ namespace AgentOS.Test
             Assert.NotNull(first.VideoProcessor);
             Assert.True(first.VideoArchitecture > 0);
             Assert.True(first.VideoMemoryType > 0);
+        }
 
+
+
+        [Fact]
+        public void GetInfoOS_ReturnDataCorrectGetInfoOS()
+        {
+            var winos = new WinOSInfo();
+            var result = WinOSInformation.GetInfoOS(winos);
+
+            var first = result.OSInfos.FirstOrDefault();
+
+            Assert.NotNull(result.OSInfos);
+            Assert.NotNull(first.OperationName);
+            Assert.NotNull(first.OperationArchitecture);
         }
 
     }
