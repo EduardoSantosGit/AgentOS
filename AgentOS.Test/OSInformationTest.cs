@@ -82,5 +82,28 @@ namespace AgentOS.Test
             Assert.NotNull(first.Speed);
         }
 
+        [Fact]
+        public void GetInfoGPU_ReturnDataCorrectGetInfoGPU()
+        {
+            var winos = new WinOSInfo();
+            var result = WinOSInformation.GetInfoGPU(winos);
+
+            var first = result.GPUs.FirstOrDefault();
+
+            Assert.NotNull(result.GPUs);
+            Assert.NotNull(first.Name);
+            Assert.NotNull(first.Status);
+            Assert.NotNull(first.Caption);
+            Assert.NotNull(first.DeviceID);
+            Assert.True(first.AdapterRAM > 0);
+            Assert.NotNull(first.AdapterDACType);
+            Assert.NotNull(first.InstalledDisplayDrivers);
+            Assert.NotNull(first.DriverVersion);
+            Assert.NotNull(first.VideoProcessor);
+            Assert.True(first.VideoArchitecture > 0);
+            Assert.True(first.VideoMemoryType > 0);
+
+        }
+
     }
 }

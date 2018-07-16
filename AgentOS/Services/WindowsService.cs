@@ -67,7 +67,5 @@ namespace AgentOS.Services
             var result = client.SendPostJson<WinOSInfo>(_urlEndPoint, winos).Result;
             return result;
         }
-
-
     }
 }
