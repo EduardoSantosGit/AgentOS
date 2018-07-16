@@ -23,6 +23,7 @@ namespace AgentOS
         public List<OSGPU> GPUs { get; set; }
         public List<OSInfo> OSInfos { get; set; }
         public List<OSInfoProcesses> OSInfoProcesses { get; set; }
+        public List<OSInfoServices> OSInfoServices { get; set; }
 
     }
 
@@ -73,5 +74,18 @@ namespace AgentOS
         public int ProcessId { get; set; }
         public string ProcessName { get; set; }
         public string Status { get; set; }
+    }
+
+    public class OSInfoServices
+    {
+        public string Name { get; set; }
+        public string StartType { get; set; }
+        public string ServicesType { get; set; }
+        public string ServiceName { get; set; }
+        public string Status { get; set; }
+
+
+
+
     }
 }
