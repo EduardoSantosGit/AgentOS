@@ -141,8 +141,16 @@ namespace AgentOS.Test
             var winos = new WinOSInfo();
             var result = WinOSInformation.GetInfoServices(winos);
 
-            Assert.NotNull(result);
+            Assert.NotNull(result.OSInfoServices);
 
+            foreach (var item in result.OSInfoServices)
+            {
+                Assert.NotNull(item.Name);
+                Assert.NotNull(item.ServiceName);
+                Assert.NotNull(item.ServicesType);
+                Assert.NotNull(item.StartType);
+                Assert.NotNull(item.Status);
+            }
         }
 
     }
