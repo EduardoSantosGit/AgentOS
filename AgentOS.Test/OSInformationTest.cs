@@ -104,8 +104,6 @@ namespace AgentOS.Test
             Assert.True(first.VideoMemoryType > 0);
         }
 
-
-
         [Fact]
         public void GetInfoOS_ReturnDataCorrectGetInfoOS()
         {
@@ -117,6 +115,24 @@ namespace AgentOS.Test
             Assert.NotNull(result.OSInfos);
             Assert.NotNull(first.OperationName);
             Assert.NotNull(first.OperationArchitecture);
+        }
+
+        [Fact]
+        public void GetInfoProcesses_ReturnDataCorrectGetInfoProcesses()
+        {
+            var winos = new WinOSInfo();
+            var result = WinOSInformation.GetInfoProcesses(winos);
+
+            Assert.NotNull(result.OSInfoProcesses);
+            Assert.NotEmpty(result.OSInfoProcesses);
+
+            foreach(var item in winos.OSInfoProcesses)
+            {
+                Assert.True(item.ProcessId > -1);
+                Assert.NotNull(item.ProcessName);
+                Assert.NotNull(item.Status);
+            }
+
         }
 
     }
