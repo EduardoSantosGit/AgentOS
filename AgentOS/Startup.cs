@@ -23,7 +23,7 @@ namespace AgentOS
                    e => TaskMonitorSystem(options.UrlBase, options.EndPoint),
                    "",
                    TimeSpan.Zero,
-                   TimeSpan.FromSeconds(5)
+                   TimeSpan.FromSeconds(options.Interval)
                 );
 
                 while (cts.IsCancellationRequested == false)
@@ -31,11 +31,14 @@ namespace AgentOS
             }
         }
 
-        public void TaskMonitorSystem(string urlBase, string urlEndPoint) => 
+        public void TaskMonitorSystem(string urlBase, string urlEndPoint) =>
                 new WindowsService(urlBase, urlEndPoint)
                 .OnMonitorServer();
 
-        public void ErrorInput(IEnumerable<Error> errors) => 
-            throw new ArgumentOutOfRangeException();
+        public void ErrorInput(IEnumerable<Error> errors)
+        {
+
+        }
+            
     }
 }
