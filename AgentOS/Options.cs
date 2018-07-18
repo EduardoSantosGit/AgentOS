@@ -13,10 +13,10 @@ namespace AgentOS
         [Option('s', Default = true, HelpText = "Start Monitoring System")]
         public bool Start { get; set; }
 
-        [Option('u', Required = false, Default = "http://localhost", HelpText = "Url Server Destiny")]
+        [Option('u', Required = false, Default = "https://httpbin.org", HelpText = "Url Server Destiny")]
         public string UrlBase { get; set; }
 
-        [Option('e', Required = false, Default = "/status/500", HelpText = "EndPoint Server Destiny")]
+        [Option('e', Required = false, Default = "/post", HelpText = "EndPoint Server Destiny")]
         public string EndPoint { get; set; }
 
         [Option('t', Required = false, Default = 10, HelpText = "Time Execution Seconds")]
